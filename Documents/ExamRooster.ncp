@@ -1,0 +1,167 @@
+<Project>
+  <Name>ExamRooster</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>ExamRoosterUML</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Exam</Name>
+        <Access>Public</Access>
+        <Location left="1654" top="781" />
+        <Size width="208" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int id</Member>
+        <Member type="Field">String title</Member>
+        <Member type="Field">String type</Member>
+        <Member type="Field">String subject</Member>
+        <Member type="Field">LocalDateTime dateTime</Member>
+        <Member type="Field">String Location</Member>
+        <Member type="Field">String duration</Member>
+        <Member type="Field">String description</Member>
+        <Member type="Field">List&lt;invigilator&gt; invigilators</Member>
+        <Member type="Field">List&lt;Student&gt; students</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>User</Name>
+        <Access>Public</Access>
+        <Location left="1134" top="736" />
+        <Size width="162" height="204" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int id</Member>
+        <Member type="Field">String firstname</Member>
+        <Member type="Field">String lastname</Member>
+        <Member type="Field">String username</Member>
+        <Member type="Field">String email</Member>
+        <Member type="Field">String password</Member>
+        <Member type="Field">Enum Role</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Enum">
+        <Name>Role</Name>
+        <Access>Public</Access>
+        <Location left="887" top="798" />
+        <Size width="162" height="129" />
+        <Collapsed>False</Collapsed>
+        <Value>Staff</Value>
+        <Value>Invigilator</Value>
+        <Value>Student</Value>
+        <Value>Admin</Value>
+      </Entity>
+      <Entity type="Class">
+        <Name>ExamService</Name>
+        <Access>Public</Access>
+        <Location left="1498" top="289" />
+        <Size width="331" height="213" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private IExamRepository examRepo</Member>
+        <Member type="Constructor">public ExamService(IExamRepository examRepo)</Member>
+        <Member type="Method">public List&lt;Exam&gt; getAllExams()</Member>
+        <Member type="Method">public Exam getById(int id)</Member>
+        <Member type="Method">public int createExam(Exam exam)</Member>
+        <Member type="Method">public int editExam(Exam exam)</Member>
+        <Member type="Method">public boolean assignStudent(Exam exam, User Student)</Member>
+        <Member type="Method">public boolean assignStudents(Exam exam, List&lt;User&gt; students)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserService</Name>
+        <Access>Public</Access>
+        <Location left="1119" top="303" />
+        <Size width="227" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private IUserRepository userRepo</Member>
+        <Member type="Constructor">public UserService(IUserRepository userRepo)</Member>
+        <Member type="Method">public List&lt;User&gt; getAllByRole(Enum Role)</Member>
+        <Member type="Method">public User getUserById(int id)</Member>
+        <Member type="Method">public int editUser(User user)</Member>
+        <Member type="Method">public int createUser(User user)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>ExamController</Name>
+        <Access>Public</Access>
+        <Location left="1456" top="10" />
+        <Size width="402" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private ExamService examService</Member>
+        <Member type="Constructor">public ExamController(ExamService examService)</Member>
+        <Member type="Method">public ResponseEntity&lt;List&lt;Exam&gt;&gt; getAllExams()</Member>
+        <Member type="Method">public ResponseEntity&lt;Exam&gt; getById(int id)</Member>
+        <Member type="Method">public ResponseEntity&lt;Exam&gt; createExam(Exam exam)</Member>
+        <Member type="Method">public ResponseEntity&lt;Exam&gt; editExam(Exam exam)</Member>
+        <Member type="Method">public ResponseEntity assignStudentToExam(Exam exam, User student)</Member>
+        <Member type="Method">public ResponseEntity assignStudentsToExam(Exam exam, List&lt;User&gt; student)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>UserController</Name>
+        <Access>Public</Access>
+        <Location left="1076" top="10" />
+        <Size width="313" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">UserSevice userService</Member>
+        <Member type="Constructor">public UserController(UserService userService)</Member>
+        <Member type="Method">public ResponseEntity&lt;List&lt;User&gt;&gt; GetAllByRole(Enum Role)</Member>
+        <Member type="Method">public ResponseEntity&lt;User&gt; getUserById(int id)</Member>
+        <Member type="Method">public ResponseEntity&lt;User&gt; editUser(User user)</Member>
+        <Member type="Method">public ResponseEntity&lt;User&gt; createUser(User user)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IExamRepository</Name>
+        <Access>Public</Access>
+        <Location left="1556" top="595" />
+        <Size width="209" height="112" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List&lt;Exam&gt; findAll()</Member>
+        <Member type="Method">Exam getById(int id)</Member>
+        <Member type="Method">int save(Exam exam)</Member>
+      </Entity>
+      <Entity type="Interface">
+        <Name>IUserRepository</Name>
+        <Access>Public</Access>
+        <Location left="1134" top="578" />
+        <Size width="212" height="112" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List&lt;User&gt; findByRole(Enum Role)</Member>
+        <Member type="Method">User getById(int id)</Member>
+        <Member type="Method">int save(User user)</Member>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="5" second="3">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="6" second="4">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="3" second="7">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="4" second="8">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
