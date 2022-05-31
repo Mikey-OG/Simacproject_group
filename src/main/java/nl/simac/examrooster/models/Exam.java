@@ -1,20 +1,39 @@
 package nl.simac.examrooster.models;
 
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Bean;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 
+@Entity
+@Table(name="exam")
 public class Exam {
+    @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name = "id", unique = true)
     private int id;
+    @Column(name = "title" )
     private String title;
+    @Column(name = "type" )
     private String type;
+    @Column(name = "subject" )
     private String subject;
 //    private LocalDateTime dateTime;
+    @Column(name = "date" )
     private String date;
+    @Column(name = "time" )
     private String time;
+    @Column(name = "location" )
     private String location;
+    @Column(name = "duration" )
     private String duration;
+    @Column(name = "description" )
     private String description;
 
     public Exam(int id, String title, String type, String subject, String date, String time, String location, String duration, String description) {
@@ -100,4 +119,20 @@ public class Exam {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", type=" + type + '\'' +
+                ", subject='" + subject + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", location='" + location + '\'' +
+                ", duration='" + duration + '\'' +
+                ", description='" + description +
+                '}';
+    }
 }
+
