@@ -1,30 +1,55 @@
 package nl.simac.examrooster.models;
 
+import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Bean;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
 
+@NoArgsConstructor
 
+@Entity
+@Table(name="exam")
 public class Exam {
+    @Id
+    @GeneratedValue
+    @NotNull
+    @Column(name = "id", unique = true)
     private int id;
+    @Column(name = "title" )
     private String title;
+    @Column(name = "type" )
     private String type;
+    @Column(name = "subject" )
     private String subject;
 //    private LocalDateTime dateTime;
+    @Column(name = "date" )
     private String date;
+    @Column(name = "time" )
     private String time;
-    private String location;
+    @ManyToOne
+    @JoinColumn(name="location_id")
+    private Location location;
+
+    @Column(name = "duration" )
     private String duration;
+    @Column(name = "description" )
     private String description;
 
-    public Exam(int id, String title, String type, String subject, String date, String time, String location, String duration, String description) {
-        this.id = id;
+
+
+    public Exam( String title, String type, String subject, String date, String time, Location location, String duration, String description) {
+
         this.title = title;
         this.type = type;
         this.subject = subject;
         this.date = date;
         this.time = time;
-        this.location = location;
+        this.location=location;
         this.duration = duration;
         this.description = description;
     }
@@ -77,11 +102,11 @@ public class Exam {
         this.time = time;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -100,4 +125,20 @@ public class Exam {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Exam{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", type=" + type + '\'' +
+                ", subject='" + subject + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", location='" + location + '\'' +
+                ", duration='" + duration + '\'' +
+                ", description='" + description +
+                '}';
+    }
 }
+
