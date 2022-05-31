@@ -1,5 +1,6 @@
 package nl.simac.examrooster.controllers;
 
+import lombok.Data;
 import nl.simac.examrooster.models.Exam;
 import nl.simac.examrooster.services.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,4 +65,16 @@ public class ExamController {
     public void deleteExam(@PathVariable("id") Integer examID){
         examService.deleteExam(examID);
     }
+
+    @PostMapping("/exams/addLocation")
+    public ResponseEntity<?>addExamLocation(@RequestBody addExamLocationForm form){
+        examService.assignExamLocation(form.getExamId(), form.getLocationId());
+        return ResponseEntity.ok().build();
+    }
+
+}
+@Data
+class addExamLocationForm {
+    private  int examId;
+    private  int locationId;
 }
