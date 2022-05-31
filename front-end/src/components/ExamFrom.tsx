@@ -2,6 +2,7 @@ import { Button, Card, CardContent, Box, Stepper, Step, StepLabel, Grid, TableCo
 import { Field, Form, Formik, FormikConfig, FormikValues } from 'formik';
 import { TextField } from 'formik-material-ui';
 import React, { ReactNode, useState } from 'react';
+import ExamService from '../services/ExamService';
 
 export default function Home(){
     return (
@@ -13,7 +14,7 @@ export default function Home(){
                     subject: '',
                     date: '',
                     time: '',
-                    location: '',
+                    location: null,
                     duration: '',
                     description: ''
                 }} 
@@ -35,9 +36,7 @@ export default function Home(){
                             <Box style={{paddingBottom: 10}}>
                                 <Field variant="standard" fullWidth name="time" component={TextField} label="Time" />
                             </Box>
-                            <Box style={{paddingBottom: 10}}>
-                                <Field variant="standard" fullWidth name="location" component={TextField} label="Location" />
-                            </Box>
+                        
                             <Box style={{paddingBottom: 10}}>
                                 <Field variant="standard" fullWidth name="duration" component={TextField} label="Duration" />
                             </Box>
@@ -90,6 +89,8 @@ export function FormikStepper({ children, ...props } : FormikConfig<FormikValues
                 setCompleted(true);
                 //setStep(0);
                 //helpers.resetForm();
+                console.log('await triggerd',values)
+               ExamService.createExam(values);
             } else {
                 console.log("test")
                 setStep((s) => s + 1)

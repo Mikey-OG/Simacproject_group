@@ -21,6 +21,7 @@ public class LocationController {
     public LocationController(ExamService examService) {this.examService = examService;
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/locations")
     public ResponseEntity<List<Location>> getAllLocations() {
         List<Location> locations = null;
@@ -33,15 +34,19 @@ public class LocationController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/ocations/{id}")
     public Optional<Location> getLocation(@PathVariable("id")Integer id){
         return examService.getLocationBy(id);
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/locations")
     public void registerNewExam(@RequestBody Location location){
         examService.addLocation(location);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @DeleteMapping("/locations/{id}")
     public void deleteExam(@PathVariable("id") Integer locationID){
         examService.deleteLocation(locationID);
