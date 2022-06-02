@@ -1,0 +1,10 @@
+#btn-container {
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 10px;
+
+}
+
+.MuiGrid-root {
+    padding: 0 !important;
+}

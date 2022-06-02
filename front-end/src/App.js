@@ -3,11 +3,11 @@ import './App.css';
 import Examstable from './components/Examstable';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import CreateExamComponent from './components/CreateExam';
-import Home from './components/ExamFrom.tsx';
+import ExamFormContainer from './components/exam_form/ExamFormContainer.tsx';
 
 function App() {
   return (
-    <Home></Home>
+    <ExamFormContainer></ExamFormContainer>
     // <div className="App">
     //   <header className="App-header">
         

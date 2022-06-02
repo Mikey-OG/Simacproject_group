@@ -38,14 +38,14 @@ public class ExamConfig {
             locationRepository.saveAll(List.of(location1,location2));
 
              */
-            Exam exam1 = new Exam("Crane driving exam","practical","Constructions machines","17/11/2022","15:30",null,"1 hour","Practical for cranes driving");
-            Exam exam2 = new Exam("Math 1","Written","Algebra","22/3/2022","09:30",null,"2 hours","No Calculaters allowed");
-            Exam a = new Exam( "CDI", "practical", "crane driving", "17/04/2022", "13:00 PM", null, "2 hours", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-            Exam b = new Exam( "second exam", "written", "math 2", "130/04/2022", "11:00 AM", null, "2 hours", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-            Exam c = new Exam( "calculus", "lab", "Chemistry 3", "06/05/2022", "9:00 AM", null, "1 hour", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-            Exam d = new Exam( "biology 1", "online", "biology", "17/04/2022", "13:00", null, "2 hours", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
-            examerepository.saveAll(List.of(exam1,exam2,a,b,c,d));
-            examService.assignExamLocation(5,1);
+//            Exam exam1 = new Exam("Crane driving exam","practical","Constructions machines","17/11/2022","15:30",null,"1 hour","Practical for cranes driving");
+//            Exam exam2 = new Exam("Math 1","Written","Algebra","22/3/2022","09:30",null,"2 hours","No Calculaters allowed");
+//            Exam a = new Exam( "CDI", "practical", "crane driving", "17/04/2022", "13:00 PM", null, "2 hours", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+//            Exam b = new Exam( "second exam", "written", "math 2", "130/04/2022", "11:00 AM", null, "2 hours", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+//            Exam c = new Exam( "calculus", "lab", "Chemistry 3", "06/05/2022", "9:00 AM", null, "1 hour", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+//            Exam d = new Exam( "biology 1", "online", "biology", "17/04/2022", "13:00", null, "2 hours", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.");
+//            examerepository.saveAll(List.of(exam1,exam2,a,b,c,d));
+//            examService.assignExamLocation(5,1);
 
         };
     }

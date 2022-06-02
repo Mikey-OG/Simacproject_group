@@ -1,6 +1,7 @@
 package nl.simac.examrooster.controllers;
 
 import lombok.Data;
+import lombok.extern.log4j.Log4j2;
 import nl.simac.examrooster.models.Exam;
 import nl.simac.examrooster.services.ExamService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@RestController @Log4j2
 public class ExamController {
 
 
@@ -29,6 +32,10 @@ public class ExamController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/exams")
     public ResponseEntity<List<Exam>> getAllExams() {
+        TimeS
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+        log.info("Date and Time -------------------------- {}", dateTime);
         List<Exam> exams = null;
         exams = examService.getAllExams();
 
