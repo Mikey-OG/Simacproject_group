@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ExamService from '../services/ExamService';
+import {Table, Button, Input} from "reactstrap";
 
 class Examstable extends Component {
 	constructor(props) {
@@ -22,11 +23,22 @@ class Examstable extends Component {
         addExam(){
             this.props.history.push('/add-exam/_add');
         }
+
+    searchTxt(e){
+        this.setState({filter:e.target.value});
+    }
+
         render() {
+            const {filter,exams , isLoading, showDeleteDialog, selectedEmployee} = this.state;
+            let DataSearch = exams.filter(exam => {
+                return Object.keys(exam).some(key => exam.name.toLowerCase().includes(filter.toLowerCase()))
+            });
+
             return (
                 <div>
                 
                     <h2 className="text-center">Exams List</h2>
+                    <Input type="text" placeholder="Search by exam name" style={{width:200,height:25, marginRight:550}} value={filter} onChange={this.searchTxt.bind(this)}></Input>
                     <div className="row">
 					
 				</div>
