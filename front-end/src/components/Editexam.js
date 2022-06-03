@@ -16,7 +16,8 @@ export default class Editexam extends Component {
 
         this.state = {
             isLoading: true,
-            exam: []
+            exam: [],
+            exam2: []
         };
 
         this.handleSubmit= this.handleSubmit.bind(this);
@@ -45,9 +46,19 @@ export default class Editexam extends Component {
 
     async componentDidMount() {
 
-        const response = await fetch(`/http://localhost:8081/exams//${this.props.match.params.id}`);
+        let uid = window.location.pathname.split('/').pop();
+        //const response = await fetch(`/http://localhost:8081/exams/${uid}`);
+        const response = await fetch("http://localhost:8081/exams/"+uid);
+        console.log("response is",response);
         const body = await response.json();
+        console.log("body is",body);
         this.setState({exam : body, isLoading: false});
+        //let param = ;
+       // let uid = window.location.pathname.split('/').pop();
+       // this.state.exam2=ExamService.getExamById(uid);
+        let exam3 =ExamService.getExamById(uid);
+        console.log("exam2 is",this.state.exam2);
+        console.log("exam3 is",exam3);
         //console.log(body);
     }
 
