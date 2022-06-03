@@ -12,7 +12,7 @@ public class ExamTest {
     private Exam Physics = new Exam(1,"Physics","Practical","Magnets","02-10-12",r10,"2 hours","learn about magnets");
 
     @Test
-    void getID() {
+    public void getID() {
         //act
         var actual = Physics.getId();
         int expected = 1;
@@ -42,20 +42,10 @@ public class ExamTest {
     }
 
     @Test
-    void getPhoneNumber() {
+    void getDateTime() {
         //act
-        var actual = John.getPhoneNumber();
-        var expected = "123456789";
-
-        //assert
-        assertEquals(expected,actual);
-    }
-
-    @Test
-    void getLicensePlateNumber() {
-        //act
-        var actual = John.getFirstName();
-        var expected = "John";
+        var actual = Physics.getDateTime();
+        var expected = "02-10-12";
 
         //assert
         assertEquals(expected,actual);
@@ -64,52 +54,31 @@ public class ExamTest {
     @Test
     void setId() {
         //act
-        var actual = John.getLicensePlateNumber();
-        var expected = "AA-AA-01";
+        Physics.setId(1);
+        var actual = Physics.getId();
+        var expected = 1;
 
         //assert
         assertEquals(expected,actual);
     }
 
     @Test
-    void setFirstName() {
+    void setTitle() {
         //act
-        John.setFirstName("Michael");
-        var actual = John.getFirstName();
-        var expected = "Michael";
+        Physics.setTitle("Maths");
+        var actual = Physics.getTitle();
+        var expected = "Maths";
 
         //assert
         assertEquals(expected,actual);
     }
 
     @Test
-    void setLastName() {
+    void setType() {
         //act
-        John.setLastName("Osun");
-        var actual = John.getLastName();
-        var expected = "Osun";
-
-        //assert
-        assertEquals(expected,actual);
-    }
-
-    @Test
-    void setPhoneNumber() {
-        //act
-        John.setPhoneNumber("1234512345");
-        var actual = John.getPhoneNumber();
-        var expected = "1234512345";
-
-        //assert
-        assertEquals(expected,actual);
-    }
-
-    @Test
-    void setLicensePlateNumber() {
-        //act
-        John.setLicensePlateNumber("BB-BB-01");
-        var actual = John.getLicensePlateNumber();
-        var expected = "BB-BB-01";
+        Physics.setType("Magnets");
+        var actual = Physics.getType();
+        var expected = "Magnets";
 
         //assert
         assertEquals(expected,actual);
@@ -118,17 +87,19 @@ public class ExamTest {
     @Test
     void testEquals() {
         //act
-        Visitor John2 = new Visitor(9,"John","Doe","123456789","AA-AA-01");
+        Exam Physics2 = new Exam(1,"Physics","Practical","Magnets","02-10-12",r10,"2 hours","learn about magnets");
+
         //assert
-        assertEquals(John,John2);
+        assertEquals(Physics,Physics2);
     }
 
     @Test
     void testHashCode() {
         //act
-        Visitor John2 = new Visitor(9,"John","Doe","123456789","AA-AA-01");
+        Exam Physics2 = new Exam(1,"Physics","Practical","Magnets","02-10-12",r10,"2 hours","learn about magnets");
+
         //assert
-        assertTrue(John.hashCode() == John2.hashCode());
+        assertTrue(Physics.hashCode() == Physics2.hashCode());
     }
 
 
