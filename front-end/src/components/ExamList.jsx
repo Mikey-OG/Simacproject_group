@@ -3,6 +3,8 @@ import {Table, Button, Input} from "reactstrap";
 //import AppNav from "../Components/AppNav";
 import { Link } from 'react-router-dom';
 import Modal from "react-bootstrap/Modal";
+import AppNav from "./AppNav";
+import { Route , withRouter} from 'react-router-dom';
 
 class ExamList extends Component {
 
@@ -29,7 +31,7 @@ class ExamList extends Component {
     }
 
     editItem(id){
-        this.props.history.push(`/edititem/${id}`);
+        this.props.history.push(`/editexam/${id}`);
     }
 
     openDeleteDialog(exam){
@@ -76,6 +78,7 @@ class ExamList extends Component {
     }
 
     render() {
+       
         const {filter,exams , isLoading, showDeleteDialog, selectedItem} = this.state;
 
         // if (isLoading)

@@ -13,9 +13,9 @@ class ExamService {
 		return axios.get(EXAM_API_BASE_URL + '/' + examId)
 	}
 
-	//updateExam(student, studentId){
-	//	return axios.put(STUDENT_API_BASE_URL + '/' + studentId, student);
-	//}
+	updateExam(examId, exam){
+		return axios.put(EXAM_API_BASE_URL + '/' + examId, exam);
+    }
 
 	//deleteStudent(studentId){
 	//	return axios.delete(STUDENT_API_BASE_URL + '/'  + studentId);
