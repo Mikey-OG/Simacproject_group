@@ -32,10 +32,10 @@ public class ExamController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/exams")
     public ResponseEntity<List<Exam>> getAllExams() {
-        TimeS
+        //TimeS
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-        log.info("Date and Time -------------------------- {}", dateTime);
+       // LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
+        //log.info("Date and Time -------------------------- {}", dateTime);
         List<Exam> exams = null;
         exams = examService.getAllExams();
 
@@ -52,20 +52,20 @@ public class ExamController {
         return examService.getExamBy(id);
     }
 
-/*
-    @PostMapping("/exams")
-    public ResponseEntity<Exam> createCountry(@RequestBody Exam exam) {
-        if (!examService.addExam(exam)){
-            String entity =  "Exam " + exam.getTitle() + " already exists.";
-            return new ResponseEntity(entity, HttpStatus.CONFLICT);
-        } else {
-            String url = "exams" + "/" + exam.getId();
-            URI uri = URI.create(url);
-            return new ResponseEntity(uri,HttpStatus.CREATED);
+    /*
+        @PostMapping("/exams")
+        public ResponseEntity<Exam> createCountry(@RequestBody Exam exam) {
+            if (!examService.addExam(exam)){
+                String entity =  "Exam " + exam.getTitle() + " already exists.";
+                return new ResponseEntity(entity, HttpStatus.CONFLICT);
+            } else {
+                String url = "exams" + "/" + exam.getId();
+                URI uri = URI.create(url);
+                return new ResponseEntity(uri,HttpStatus.CREATED);
+            }
         }
-    }
 
- */
+     */
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/exams")
     public void registerNewExam(@RequestBody Exam exam){
