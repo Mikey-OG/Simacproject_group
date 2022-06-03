@@ -1,5 +1,5 @@
 class Location {
-    constructor(id: number, address: string, postcode: string, capacity: number, tools: string){
+    constructor(public id: number, public address: string, public postcode: string, public capacity: number, public tools: string){
 
     }
 }
