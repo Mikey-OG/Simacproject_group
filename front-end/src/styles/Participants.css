@@ -1,3 +1,11 @@
+.MuiBox-root {
+    padding-bottom: 20px;
+}
+
+#student-search {
+    padding-bottom: 0;
+}
+
 .participants-container {
     width: 80%;
     margin: 0 auto;
@@ -6,9 +14,9 @@
 .no-suggestions {
     color: #999;
     padding: 0.5rem;
-  }
-  
-  .suggestions {
+}
+
+.suggestions {
     border: 1px solid #999;
     border-top-width: 0;
     list-style: none;
@@ -16,21 +24,23 @@
     max-height: 143px;
     overflow-y: auto;
     padding-left: 0;
-    width: calc(300px + 1rem);
-  }
-  
-  .suggestions li {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.suggestions li {
     padding: 0.5rem;
-  }
-  
-  .suggestion-active,
-  .suggestions li:hover {
-    background-color: #008f68;
-    color: #fae042;
+}
+
+.suggestion-active,
+.suggestions li:hover {
+    background-color: #3f51b5;
+    color: #ffffff;
     cursor: pointer;
     font-weight: 700;
-  }
-  
-  .suggestions li:not(:last-of-type) {
+    border-radius: 5px;
+}
+
+.suggestions li:not(:last-of-type) {
     border-bottom: 1px solid #999;
-  }
+}

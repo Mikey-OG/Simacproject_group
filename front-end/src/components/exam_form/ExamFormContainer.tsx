@@ -5,21 +5,22 @@ import React from 'react';
 import { string } from 'yup';
 import ExamCreateDto from '../../models/dtos/ExamCreateDto.ts';
 import ExamDetails from './ExamDetails.tsx';
+import LocationDetails from './LocationDetails.js'
 import { FormStep, FormikStepper } from './FormStep.tsx';
 import Students from './Students.js';
 import Invigilators from './Invigilators.js';
 import Student from '../../models/Student';
+import Invigilator from '../../models/Invigilator';
 
 // export default function
-class ExamFormContainer extends React.Component<{}, { students: Student[] }> {
+class ExamFormContainer extends React.Component<{}, { dateTime: string, locationId: number, students: Student[], invigilators: Invigilator[] }> {
 
-    examCreateDto: ExamCreateDto = new ExamCreateDto();
-
+    examCreateDto: ExamCreateDto;
 
     constructor(props) {
         super(props);
 
-        this.state = {students: []}
+        this.state = {dateTime: "", locationId: -1, students: [], invigilators: []}
 
     }
     
@@ -27,18 +28,34 @@ class ExamFormContainer extends React.Component<{}, { students: Student[] }> {
     onNewStudent = (student: Student) => {
         console.log(student);
         this.setState({students:[...this.state.students, student]})
-        //this.examCreateDto.students = this.students;
-       
+        //this.examCreateDto.students = this.students;      
+    }
+
+    onNewInvigilator = (invigilator: Invigilator) => {
+        console.log(invigilator);
+        this.setState({invigilators:[...this.state.invigilators, invigilator]})
+        //this.examCreateDto.students = this.students; 
     }
 
     onSelectDateTime = (dateTime: string) => {
-        this.examCreateDto.dateTime = dateTime;
+        this.setState({dateTime: dateTime});
         console.log(this.examCreateDto)
+    }
+
+    onSelectLocation = (locationId: number) => {
+        this.setState({locationId: locationId});
+    }
+// public title: string, public type:string, public subject: string, public dateTime: string, public locationId: number, public duration: string, public description: string, public students: Student[], public invigilators: Invigilator[]) {
+
+    onSubmit = (data) => {
+        const { dateTime, locationId, students, invigilators } = this.state;
+        this.examCreateDto = new ExamCreateDto(data.title, data.type, data.subject, dateTime, locationId, data.duration, data.description, students, invigilators);
+        console.log(this.examCreateDto);
     }
 
     render() { 
         return (
-            <Card variant="outlined" style={{width:"60%", marginTop: 10, marginBottom: 10, marginLeft: "auto", marginRight: "auto"}}>
+            <Card variant="outlined" style={{width:"60%", marginTop: 30, marginBottom: 10, marginLeft: "auto", marginRight: "auto"}}>
                 <CardContent style={{padding: 60}}>
                     <FormikStepper initialValues={{
                         title: '',
@@ -51,23 +68,21 @@ class ExamFormContainer extends React.Component<{}, { students: Student[] }> {
                         studentsEmails: [],
                         invigilatorsEmails: []
                     }} 
-                    onSubmit={ (data)=>{console.log(data)} }>
+                    onSubmit={ (data)=>{this.onSubmit(data);console.log(data)} }>
                         
                             <FormStep label="Exam Details">
                                 <ExamDetails onSelectDateTime= { this.onSelectDateTime }>
                                 </ExamDetails>  
                             </FormStep>
                             <FormStep label="Students">
-                                <Students students={this.state.students} onNewStudent= { this.onNewStudent } name="studentsEmails" label="Student Name"/>
+                                <Students participants={this.state.students} onNewStudent= { this.onNewStudent } name="studentsEmails" label="Student Name"/>
                             </FormStep>
                             <FormStep label="Invigilators">
-                                <Invigilators onNewStudent= { this.onNewStudent } name="invigilatorsEmails" label="Invigilator Name">
+                                <Invigilators participants={this.state.invigilators} onNewInvigilator= { this.onNewInvigilator } name="invigilatorsEmails" label="Invigilator Name">
                                 </Invigilators>
                             </FormStep>
                             <FormStep label="Location">
-                                <Box style={{paddingBottom: 20}}>
-                                    <Field fullWidth variant="standard" name="description" component={TextField} label="Email" />
-                                </Box>
+                                <LocationDetails onSelectLocation={ this.onSelectLocation }></LocationDetails>
                             </FormStep>
                             
                             

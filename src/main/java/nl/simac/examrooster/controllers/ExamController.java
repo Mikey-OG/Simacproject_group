@@ -32,10 +32,7 @@ public class ExamController {
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/exams")
     public ResponseEntity<List<Exam>> getAllExams() {
-        TimeS
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime dateTime = LocalDateTime.parse(date, formatter);
-        log.info("Date and Time -------------------------- {}", dateTime);
+
         List<Exam> exams = null;
         exams = examService.getAllExams();
 
