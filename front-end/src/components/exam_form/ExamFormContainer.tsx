@@ -14,6 +14,7 @@ import ExamLocation from '../../models/ExamLocation.ts';
 import ExamConfirmation from './ExamConfirmation';
 import { createExam } from '../../api/Api.ts';
 import '../../styles/ExamFormContainer.css'
+import { ExamSchema } from '../../validations/ExamValidation.js';
 
 // export default function
 class ExamFormContainer extends React.Component<{}, {title: string, type: string, subject: string, duration: string, description: string, dateTime: string, location: ExamLocation, locationId: number, students: Student[], invigilators: Invigilator[], isReqSuccess: boolean }> {
@@ -96,6 +97,8 @@ class ExamFormContainer extends React.Component<{}, {title: string, type: string
                         duration: '',
                         description: '',
                     }}
+
+                    validationSchema={ExamSchema}
 
                     onExamDetails={
                         (data) =>{

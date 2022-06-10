@@ -1,5 +1,5 @@
 import { Box } from '@material-ui/core';
-import { Field } from 'formik';
+import { Field, ErrorMessage } from 'formik';
 import { TextField } from 'formik-material-ui';
 import React from "react"; 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
@@ -20,6 +20,7 @@ export default function ExamDetails(props){
 			<Box>
 				<Field variant="outlined" fullWidth name="title" component={TextField} label="Title"/>
 			</Box>
+			{/* <ErrorMessage name="title" /> */}
 			<Box>
 				<Field variant="outlined" fullWidth name="type" component={TextField} label="Type" />
 			</Box>
