@@ -1,16 +1,13 @@
 import React from "react";
 import { TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@material-ui/core';
 import "../../styles/LocationDetails.css"
-import { Box } from '@material-ui/core';
-import { Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
+import { getAllLocations } from "../../api/Api.ts";
 
 class LocationDetails extends React.Component {
 	constructor(props){
 		super(props)
 
-		this.state = {selectedLocation: null, selectedLocationId: -1}
+		this.state = {selectedLocation: null, selectedLocationId: -1, locations: []}
 	}
 
 	columns = [
@@ -27,22 +24,27 @@ class LocationDetails extends React.Component {
 		}
 	];
 
-	rows = [
-		{ id: 1, address: 'Snow 10', postcode: '4937LL', capacity: 35, tools:"some shit" },
-		{ id: 2, address: 'Snow 14', postcode: '4937LL', capacity: 25, tools:"some shit" },
-		{ id: 3, address: 'Snow 13', postcode: '4937LL', capacity: 45, tools:"some shit" },
-		{ id: 4, address: 'Snow 15', postcode: '4937LL', capacity: 37, tools:"some shit" },
-		{ id: 5, address: 'Snow 11', postcode: '4937LL', capacity: 20, tools:"some shit" }
-	];
+	rows = [];
+
+	componentDidMount() {
+		getAllLocations()
+		.then(res => {
+			this.setState({locations: res.data})
+			console.log(this.state.locations)
+		})
+		.catch((error) => {
+			// handle error
+			console.log(error);
+		})
+	}
 
 	onSelectLocation = (location) => {
-		console.log(location)
 		this.setState({selectedLocation: location, selectedLocationId: location.id});
-		this.props.onSelectLocation(location.id);
+		this.props.onSelectLocation(location, location.id);
 	}
 
 	render(){
-		const locations = this.rows.map((location)=>{
+		const locations = this.state.locations.map((location)=>{
 			return (
 				<TableRow className={this.state.selectedLocation === location ? "selected" : ""} onClick={()=>{this.onSelectLocation(location)}} key={location.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
 					<TableCell align="center">{location.id}</TableCell>
@@ -71,23 +73,6 @@ class LocationDetails extends React.Component {
 					</TableBody>
 				</Table>
 			</TableContainer>
-
-			// <div id="location-container">
-			// 	<Box>
-			// 		<Field variant="outlined" fullWidth name="title" component={TextField} label="Title"/>
-			// 	</Box>
-
-			// 	<div style={{ height: 400, width: '100%' }}>
-			// 		<DataGrid
-			// 			rows={this.rows}
-			// 			columns={this.columns}
-			// 			pageSize={5}
-			// 			rowsPerPageOptions={[5]}
-			// 			checkboxSelection
-			// 		/>
-			// 	</div>
-					
-			// </div>
 		);
 	}
 

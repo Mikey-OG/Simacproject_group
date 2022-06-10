@@ -1,26 +1,23 @@
 import React from "react";
+import axios from "axios";
 import { Box } from "@material-ui/core";
 import { Field } from "formik";
 import { TextField } from "formik-material-ui";
+
 import ParticipantsTable from "./ParticipantsTable.js";
 import "../../styles/Participants.css";
 import Student from "../../models/Student.ts";
+import StudentApi from "../../api/Api.ts";
+import { getAllStudents } from "../../api/Api.ts";
 
 class Students extends React.Component {
-  students = [
-    new Student(1, "omar", "omar@gamil.com", "23/4/1990", "49387587r65"),
-    new Student(2, "rawan", "rawan@gamil.com", "23/4/1990", "49387587r65"),
-    new Student(3, "test", "test@gamil.com", "23/4/1990", "49387587r65"),
-    new Student(4, "nour", "nour@gamil.com", "23/4/1990", "49387587r65"),
-    new Student(5, "achmed", "achmed@gamil.com", "23/4/1990", "49387587r65"),
-  ];
+  students = [];
 
   constructor(props) {
     super(props);
-    console.log(this.students);
 
     this.state = {
-      student: new Student(),
+      studentName: "",
       addedStudents: [],
       activeSuggestion: 0,
       // The suggestions that match the user's input
@@ -28,6 +25,18 @@ class Students extends React.Component {
       // Whether or not the suggestion list is shown
       showSuggestions: false,
     };
+  }
+
+  componentDidMount(){
+    getAllStudents()
+    .then(res => {
+      this.students = res.data
+    })
+    .catch((error) => {
+      // handle error
+      console.log(error);
+    })
+    
   }
 
   onInputChange = (e) => {
@@ -52,12 +61,21 @@ class Students extends React.Component {
       this.state.filteredSuggestions[this.state.activeSuggestion]
     );
 
+    //remove added students from sugg list
+    const index = this.students.indexOf(this.state.filteredSuggestions[this.state.activeSuggestion]);
+
+    if (index > -1) {
+      this.students.splice(index, 1); // 2nd parameter means remove one item only
+    }
+
     this.setState({
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
-      studentName: e.currentTarget.innerText,
+      studentName: "",
     });
+
+    
   };
 
   onMouseEnter = (e) => {
@@ -141,7 +159,7 @@ class Students extends React.Component {
           <Field
             onChange={this.onInputChange}
             onKeyDown={this.onKeyDown}
-            value={this.state.student.name}
+            value={this.state.studentName}
             fullWidth
             variant="outlined"
             name={this.props.name}

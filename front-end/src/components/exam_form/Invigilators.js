@@ -5,35 +5,43 @@ import { TextField } from "formik-material-ui";
 import "../../styles/Participants.css";
 import Invigilator from "../../models/Invigilator.ts";
 import ParticipantsTable from "./ParticipantsTable.js";
+import { getAllInvigilators } from "../../api/Api.ts";
 
 class Invigilators extends React.Component {
-	invigilators = [
-		new Invigilator(1, "omar", "omar@gamil.com", "23/4/1990", "49387587r65"),
-		new Invigilator(2, "rawan", "rawan@gamil.com", "23/4/1990", "49387587r65"),
-		new Invigilator(3, "test", "test@gamil.com", "23/4/1990", "49387587r65"),
-		new Invigilator(4, "nour", "nour@gamil.com", "23/4/1990", "49387587r65"),
-		new Invigilator(5, "achmed", "achmed@gamil.com", "23/4/1990", "49387587r65"),
-	];
+	invigilators = [];
 
 	constructor(props) {
-	super(props);
-	console.log(this.invigilators);
+		super(props);
+		console.log(this.invigilators);
 
-	this.state = {
-	  invigilator: new Invigilator(),
-	  addedStudents: [],
-	  activeSuggestion: 0,
-	  // The suggestions that match the user's input
-	  filteredSuggestions: [],
-	  // Whether or not the suggestion list is shown
-	  showSuggestions: false,
-	};
-  }
+		this.state = {
+			invigilatorName:"",
+			addedStudents: [],
+			activeSuggestion: 0,
+			// The suggestions that match the user's input
+			filteredSuggestions: [],
+			// Whether or not the suggestion list is shown
+			showSuggestions: false,
+		};
+  	}
+	
+	componentDidMount(){
+		getAllInvigilators()
+		.then(res => {
+			this.invigilators = res.data
+			console.log(this.invigilators)
+		})
+		.catch((error) => {
+			// handle error
+			console.log(error);
+		})
+	
+	}
 
 	onInputChange = (e) => {
 		const invigilatorName = e.currentTarget.value;
 
-		// Filter our suggestions that don't contain the user's input
+		// Filter suggestions that don't contain the user's input
 		const filteredSuggestions = this.invigilators.filter(function (invigilator) {
 			return (
 				invigilator.name.toLowerCase().indexOf(invigilatorName.toLowerCase()) > -1
@@ -54,11 +62,18 @@ class Invigilators extends React.Component {
 			this.state.filteredSuggestions[this.state.activeSuggestion]
 		);
 
+		//remove added ing from sugg list
+		const index = this.invigilators.indexOf(this.state.filteredSuggestions[this.state.activeSuggestion]);
+
+		if (index > -1) {
+			this.invigilators.splice(index, 1); // 2nd parameter means remove one item only
+		}
+
 		this.setState({
 			activeSuggestion: 0,
 			filteredSuggestions: [],
 			showSuggestions: false,
-			invigilatorName: e.currentTarget.innerText,
+			invigilatorName: "",
 		});
 	};
 
@@ -144,7 +159,7 @@ class Invigilators extends React.Component {
 					<Field
 					onChange={this.onInputChange}
 					onKeyDown={this.onKeyDown}
-					value={this.state.invigilator.name}
+					value={this.state.invigilatorName}
 					fullWidth
 					variant="outlined"
 					name={this.props.name}

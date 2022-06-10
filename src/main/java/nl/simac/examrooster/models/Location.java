@@ -2,16 +2,14 @@ package nl.simac.examrooster.models;
 
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -19,48 +17,30 @@ import java.util.Set;
 public class Location {
     @Id
     @GeneratedValue
-    @Getter
-    @Setter
     @NotNull
     @Column(name = "id", unique = true)
     private int id;
 
-    @Getter@Setter
-    @Column(name = "code" )
-    private String code;
+    @Column(name = "address")
+    private String address;
 
-    @Getter@Setter
+    @Column(name = "postcode" )
+    private String postcode;
+
     @Column(name = "capacity" )
     private int capacity;
 
 
     //need to be replaced by a list<opject> or list<enum>
    // private List<ExamTool> Etools;
-    @Getter@Setter
-    @Column(name = "etools" )
-    private String etools;
-/*
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "location")
-    private Set<Exam> exams;
- */
-    /*
-    public Location(int id, String code, int capacity, String etools) {
-        this.id = id;
-        this.code = code;
+    @Column(name = "tools" )
+    private String tools;
+
+    public Location(String address, String postcode, int capacity, String tools) {
+        this.address = address;
+        this.postcode = postcode;
         this.capacity = capacity;
-        this.etools = etools;
+        this.tools = tools;
     }
-
-     */
-    @Override
-    public String toString() {
-        return "Location{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", capacity=" + capacity + '\'' +
-                ", etools='" + etools + '\'' +
-                '}';
-    }
-
 
 }

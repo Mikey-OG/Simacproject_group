@@ -1,13 +1,12 @@
 import { Box } from '@material-ui/core';
 import { Field } from 'formik';
 import { TextField } from 'formik-material-ui';
-import React, { Fragment, useState, useEffect } from "react";
-import "../../styles/ExamDetails.css"
- 
+import React from "react"; 
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import InputField from '@mui/material/TextField';
+import "../../styles/ExamDetails.css"
 
 export default function ExamDetails(props){
 	const [dateTime, setDateTime] = React.useState<Date | null>(new Date());
@@ -39,8 +38,6 @@ export default function ExamDetails(props){
 						onChange={(newDate) => {
 							setDateTime(newDate);
 							onSelectDateTime();
-							// console.log(formatDate(dateTime, ''));
-							console.log(dateTime.toLocaleString());
 						}}
 					/>
 					
