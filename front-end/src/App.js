@@ -9,6 +9,7 @@ import Editexam from './components/Editexam';
 import ExamList from './components/ExamList';
 import AppNav from './components/AppNav';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import ExamDetails from './components/ExamDetails';
 
 class App extends Component {
   state = {  }
@@ -18,11 +19,13 @@ class App extends Component {
               <AppNav></AppNav>
               <Router>
               <Routes >
-                <Route path="/" exact element= {<ExamList/>} /> 
-            
+                <Route path="/" exact element= {<ExamDetails/>} /> 
+                <Route path="/home" exact element= {<ExamDetails/>} />
+                <Route path="/list" exact element= {<ExamList/>} />  
                   <Route path="exams" element= {<ExamList/>} /> 
                   <Route path="addexam" element= {<ExamFormContainer/>} /> 
                   <Route path="editexam/:id" element={<Editexam/>} />
+              
                
               </Routes >
           </Router>

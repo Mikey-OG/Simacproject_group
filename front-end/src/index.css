@@ -11,3 +11,38 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.exam1 {
+ 
+  
+  margin: 2rem;
+  padding: 0.3rem 0.3rem;
+ 
+  
+
+}
+.card{
+  
+  width: auto;
+  color: #245269;
+  text-align: center;
+  margin-right: 1rem;
+  margin-top:1rem;
+  margin-bottom: 1rem;
+  margin-left: 1rem;
+
+ 
+}
+.search-input {
+ 
+  padding: 1.4em 2em;
+  padding-left: 2.7em;
+  border: 1px solid var(--border);
+  color: var(--gray);
+  box-shadow: 0px 4px 6px var(--border);
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  &:hover {
+      box-shadow: 0px 0px 0px var(--border);
+  }
+}

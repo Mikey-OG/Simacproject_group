@@ -6,6 +6,8 @@ import Modal from "react-bootstrap/Modal";
 import AppNav from "./AppNav";
 import { Route , withRouter} from 'react-router-dom';
 import Navigate from 'react-router-dom';
+import { Accordion } from "react-bootstrap";
+
 
 class ExamList extends Component {
 
@@ -35,6 +37,7 @@ class ExamList extends Component {
         window.open(`/editexam/${id}`);
        // this.props.history.push(`/editexam/${id}`);
     }
+ 
 
     openDeleteDialog(exam){
         this.setState({selectedItem: exam});
@@ -100,9 +103,23 @@ class ExamList extends Component {
                     <td>{item.dateTime}</td>
                     <td>{item.duration}</td>
                     <td>{item.description}</td>
+                    <td><Accordion>
+                    <Accordion.Item eventKey="0">
+                    <Accordion.Header>Students</Accordion.Header>
+                    <Accordion.Body>
+                    {item.students.map((stu, key) => {
+                      return (
+                    <div>
+                      <h2>Student: {stu.name}</h2>
+                   </div>
+                    );
+                    })}
+                 
+                    </Accordion.Body>
+                    </Accordion.Item>
+                    </Accordion></td>
                     <td><Button style={{marginRight: '10px'}} size="sm" color="primary"
                                 onClick={() => this.editItem(item.id)}>Edit</Button>
-
                         <Button size="sm" color="danger" onClick={() => this.openDeleteDialog(item)}>Delete</Button></td>
                 </tr>
             );
