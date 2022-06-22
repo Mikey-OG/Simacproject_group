@@ -1,0 +1,13 @@
+.examOverview {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.overviewGrid {
+    width: 100%;
+    row-gap: 15px;
+}
+
+/* .item {
+    margin-bottom: 15px;
+} */

@@ -49,6 +49,7 @@ public class ExamController {
         return examService.getExamBy(id);
     }
 
+<<<<<<< HEAD
     /*
         @PostMapping("/exams")
         public ResponseEntity<Exam> createCountry(@RequestBody Exam exam) {
@@ -63,10 +64,29 @@ public class ExamController {
         }
 
      */
+=======
+
+//    @PostMapping("/exams")
+//    public ResponseEntity<Exam> createExam(@RequestBody Exam exam) {
+//        if (!examService.addExam(exam)){
+//            String entity =  "Exam " + exam.getTitle() + " already exists.";
+//            return new ResponseEntity(entity, HttpStatus.CONFLICT);
+//        } else {
+//            String url = "exams" + "/" + exam.getId();
+//            URI uri = URI.create(url);
+//            return new ResponseEntity(uri,HttpStatus.CREATED);
+//        }
+//    }
+
+
+>>>>>>> main
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/exams")
-    public void registerNewExam(@RequestBody Exam exam){
+    public ResponseEntity<Exam> createExam(@RequestBody Exam exam){
+        log.info(">>>>>>>>>>>>> Exam: {}", exam);
         examService.addExam(exam);
+        URI location = URI.create(String.format("/exams/" + exam.getId()));
+        return ResponseEntity.created(location).build();
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

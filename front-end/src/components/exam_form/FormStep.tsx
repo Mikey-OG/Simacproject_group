@@ -22,18 +22,24 @@ export function FormikStepper({ children, ...props } : FormikConfig<FormikValues
         return step === childrenArray.length - 1;
     }
 
+    function isFirstStep(){
+        return step === 0;
+    }
+
     return(
         <Formik {...props} onSubmit={async (values, helpers) => {
             //Submit or next....
-            if(isLastStep()) {
+            if(isFirstStep()){
+                setStep((s) => s + 1)
+                console.log(props)
+                props.onExamDetails(values);
+            } else if(isLastStep()) {
                 await props.onSubmit(values, helpers);
                 setCompleted(true);
-                //setStep(0);
-                //helpers.resetForm();
-                // console.log('await triggerd',values)
-                // ExamService.createExam(values);
             } else {
                 setStep((s) => s + 1)
+                console.log("Vals:");
+                console.log(values)
             }
         }}>
             <Form>

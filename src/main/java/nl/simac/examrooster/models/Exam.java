@@ -1,5 +1,6 @@
 package nl.simac.examrooster.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,8 +10,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-@NoArgsConstructor @AllArgsConstructor @Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name="exam")
 public class Exam {
@@ -39,9 +43,45 @@ public class Exam {
     @Column(name = "description" )
     private String description;
 
+    @ManyToMany(
+            targetEntity = Student.class,
+            cascade = {CascadeType.MERGE},
+            fetch = FetchType.LAZY
+    )
+    @JoinTable(
+            name = "student_exam",
+            joinColumns = {@JoinColumn(name="exam_id")} ,
+            inverseJoinColumns = {@JoinColumn(name="student_id")}
+    )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Student> students;
 
+    @ManyToMany(
+            targetEntity = Invigilator.class,
+            cascade = {CascadeType.MERGE},
+            fetch = FetchType.LAZY
+    )
+    @JoinTable(
+            name = "invigilator_exam",
+            joinColumns = {@JoinColumn(name="exam_id")} ,
+            inverseJoinColumns = {@JoinColumn(name="invigilator_id")}
+    )
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    private List<Invigilator> invigilators;
 
-//    public Exam( String title, String type, String subject, String date, String time, Location location, String duration, String description) {
+    public Exam(String title, String type, String subject, String dateTime, Location location, String duration, String description, List<Student> students, List<Invigilator> invigilators) {
+        this.title = title;
+        this.type = type;
+        this.subject = subject;
+        this.dateTime = dateTime;
+        this.location = location;
+        this.duration = duration;
+        this.description = description;
+        this.students = students;
+        this.invigilators = invigilators;
+    }
+
+    //    public Exam( String title, String type, String subject, String date, String time, Location location, String duration, String description) {
 //
 //        this.title = title;
 //        this.type = type;

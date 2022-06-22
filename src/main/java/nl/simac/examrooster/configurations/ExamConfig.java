@@ -12,21 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import java.util.List;
 
 
-
-
 @Configuration
 public class ExamConfig {
-    @Bean
-    CommandLineRunner locationCommandLineRunner(LocationRepository locationRepository) {
-        return args -> {
-            Location location1 = new Location(1, "C2", 10, "PC");
-            Location location2 = new Location(2, "Yard B", 2, "Crane");
-
-            locationRepository.saveAll(List.of(location1, location2));
-        };
-    }
-
-
 
     @Bean
     CommandLineRunner commandLineRunner(ExamRepository examerepository, LocationRepository locationRepository, ExamService examService){
