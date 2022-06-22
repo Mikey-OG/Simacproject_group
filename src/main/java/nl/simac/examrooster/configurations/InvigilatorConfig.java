@@ -15,6 +15,7 @@ public class InvigilatorConfig {
 	@Bean
 	CommandLineRunner invigilatorCommandLineRunner (InvigilatorRepository invigilatorRepository){
 		return args -> {
+			/*
 			Invigilator invigilator1 = new Invigilator("Rawan", "omar@invigilator.com", "12/03/1994", "0124897254");
 			Invigilator invigilator2 = new Invigilator("Kevin", "Kevin@invigilator.com", "12/03/1994", "0124897254");
 			Invigilator invigilator3 = new Invigilator("Nour", "Nour@invigilator.com", "12/03/1994", "0124897254");
@@ -30,6 +31,8 @@ public class InvigilatorConfig {
 			Collections.addAll(invigilators, invigilator1, invigilator2, invigilator3, invigilator4, invigilator5, invigilator6, invigilator7, invigilator8, invigilator9, invigilator10);
 
 			invigilatorRepository.saveAll(invigilators);
+
+			 */
 		};
 	}
 }

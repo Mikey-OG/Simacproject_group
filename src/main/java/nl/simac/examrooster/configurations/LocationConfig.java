@@ -19,7 +19,7 @@ public class LocationConfig {
     @Bean
     CommandLineRunner locationCommandLineRunner(LocationRepository locationRepository) {
         return args -> {
-
+/*
             Location location1 = new Location("Snow 10", "4937LL", 35, "PC" );
             Location location2 = new Location("Snow 14", "4943LL",  25, "Crane");
             Location location3 = new Location("Snow 13", "4326LL", 45, "Carpentry tools" );
@@ -30,6 +30,8 @@ public class LocationConfig {
 	        Collections.addAll(locations, location1, location2, location3, location4, location5);
 
             locationRepository.saveAll(locations);
+
+ */
         };
     }
 

@@ -15,6 +15,7 @@ public class StudentConfig {
 	@Bean
 	CommandLineRunner studentCommandLineRunner (StudentRepository studentRepository){
 		return args -> {
+			/*
 			Student student1 = new Student("Rawan", "rawan@student.com", "12/03/1994", "0124897254");
 			Student student2 = new Student("Kevin", "Kevin@student.com", "12/03/1994", "0124897254");
 			Student student3 = new Student("Nour", "Nour@student.com", "12/03/1994", "0124897254");
@@ -30,6 +31,8 @@ public class StudentConfig {
 			Collections.addAll(students, student1, student2, student3, student4, student5, student6, student7, student8, student9, student10);
 
 			studentRepository.saveAll(students);
+
+			 */
 		};
 	}
 }

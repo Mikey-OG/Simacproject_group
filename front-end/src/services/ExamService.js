@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const EXAM_API_BASE_URL = "http://localhost:8081/exams/";
+const EXAM_API_BASE_URL = "http://localhost:8080/exams/";
 
 class ExamService {
 	getExams(){
