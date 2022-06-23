@@ -5,6 +5,7 @@ import { Container, Form, FormGroup, Input, Label, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Route , withRouter} from 'react-router-dom';
 import ExamService from '../services/ExamService';
+import Modal from "react-bootstrap/Modal";
 
 
 export default class Editexam extends Component {
@@ -16,12 +17,17 @@ export default class Editexam extends Component {
 
         this.state = {
             isLoading: true,
+            selectedItem: [],
+            showDeleteDialog: false,
             exam: [],
             exam2: []
         };
 
         this.handleSubmit= this.handleSubmit.bind(this);
         this.handleChange= this.handleChange.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);
+        this.openDeleteDialog = this.openDeleteDialog.bind(this);
+        this.closeDeleteDialog = this.closeDeleteDialog.bind(this);
     }
 
     async handleSubmit(event){
@@ -42,6 +48,33 @@ export default class Editexam extends Component {
         exam[name] = value;
         this.setState({exam: exam});
         //console.log(item);
+    }
+
+    openDeleteDialog(exam){
+        this.setState({selectedItem: exam});
+        this.setState({showDeleteDialog: true});
+    }
+
+    closeDeleteDialog(){
+        this.setState({showDeleteDialog: false});
+    }
+
+    async deleteItem(){
+        let uid = window.location.pathname.split('/').pop();
+        const id = this.state.selectedItem.id;
+        await fetch("http://localhost:8081/exams/"+uid, {
+            method: 'DELETE',
+            headers : {
+                'Accept' : 'application/json',
+                'Content-Type' : 'application/json'
+            }
+        }).then(() => {
+            let updatedItems = this.state.exams;
+            updatedItems.splice(updatedItems.findIndex(function(i){
+                return i.id === id;
+            }), 1);
+            this.setState({guests: updatedItems, showDeleteDialog: false});
+        });
     }
 
     async componentDidMount() {
@@ -65,13 +98,14 @@ export default class Editexam extends Component {
 
     render() {
 
-        const {exam: exam, isLoading} = this.state;
+        const {exam: exam, isLoading, showDeleteDialog, selectedItem} = this.state;
 
        // if (isLoading)
            // return(<div>Loading...</div>)
         return (
-            <div><AppNav/>
-                <h2 className="text-center mt-5">Edit Item</h2>
+            <div>
+               {/* <AppNav/>*/}
+                <h2 className="text-center mt-5">Edit Exam details</h2>
                 <div className="container">
                     <div className="row">
                         <div className="col"></div>
@@ -107,8 +141,9 @@ export default class Editexam extends Component {
                                         <Input type="text" name="description" id="description" value={exam.description} onChange={this.handleChange}></Input>
                                     </FormGroup>
                                     <FormGroup>
-                                        <Button color="success" type="submit" onClick={this.handleClick}>Edit</Button>{' '}
-                                        <Button color="secondary" tag={Link} to="/home">Cancel</Button>
+                                        <Button className={"delbutton"} color="primary" type="submit" onClick={this.handleClick}>Save</Button>{' '}
+                                        <Button className={"delbutton"} color="danger" onClick={() => this.openDeleteDialog(exam)}>Delete</Button>
+                                        <Button className={"delbutton"} color="secondary" tag={Link} to="/home">Cancel</Button>
                                     </FormGroup>
                                 </Form>
                             </Container>
@@ -116,6 +151,21 @@ export default class Editexam extends Component {
                         <div className="col"></div>
                     </div>
                 </div>
+                <Modal show={showDeleteDialog} onHide={() => this.closeDeleteDialog()}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Delete Exam</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Are you sure you want to delete this exam?<br/>
+                        {selectedItem.id} {selectedItem.title}</Modal.Body>
+                    <Modal.Footer>
+                        <Button color="danger" onClick={() => this.deleteItem()} tag={Link} to="/home">
+                            Delete
+                        </Button>
+                        <Button color="primary" onClick={() => this.closeDeleteDialog()}>
+                            Cancel
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
             </div> );
     }
 }

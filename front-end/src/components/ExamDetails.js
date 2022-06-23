@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap';
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -35,8 +35,9 @@ function ExamDetails({}) {
 
     },[exams])
      return (<div>
+             <h2 className="text-center mt-5">Exam Overview</h2>
         <Row>
-        <Input className="search-input" type="text" placeholder="Seach Exam by Title..." onChange={e=>setSearchTerm(e.target.value)} />
+        <Input className="search-input text-center" type="text" placeholder="Search Exam by Title..." onChange={e=>setSearchTerm(e.target.value)} />
       {exams.filter((exam)=>{
         if(searchTerm == ""){
           return exam
@@ -133,9 +134,9 @@ function ExamDetails({}) {
                         <Link to={`/editexam/${exam.id}`}>
                     <Button variant="primary" size="lg">Edit</Button>
                     </Link>
-                        <Link to={``}>
+                       {/* <Link to={``}>
                             <Button className={"delbutton"} variant="danger" size="lg">Delete</Button>
-                        </Link>
+                        </Link>*/}
 
                     </Card.Footer>
         </Card>
