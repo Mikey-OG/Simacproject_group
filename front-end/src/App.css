@@ -28,6 +28,19 @@
   color: #61dafb;
 }
 
+.color-nav {
+  color: #fff;
+  background-color: #3f51b5
+}
+.ebutton{
+  color: #fff;
+  background-color: #3f51b5
+}
+
+.delbutton{
+  margin-left: 20px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

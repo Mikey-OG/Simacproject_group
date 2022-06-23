@@ -4,6 +4,8 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Col,Accordion,Table,Row,ListGroup } from "react-bootstrap";
 import {Input} from "reactstrap";
+import '../App.css';
+import ExamList from "./ExamList";
 
 function ExamDetails({}) {
     const [exams, setExams] = useState([])
@@ -19,17 +21,19 @@ function ExamDetails({}) {
         console.log('exam in fetch method',exams)
         return data
       }
+
       const getExams = async () =>{
         const examFromServer = await fetchExams()
         setExams(examFromServer)
         console.log('exam in fetch useeffect',exams)
      
       
-      } 
+      }
+
       
       getExams()
-     
-      },[exams])
+
+    },[exams])
      return (<div>
         <Row>
         <Input className="search-input" type="text" placeholder="Seach Exam by Title..." onChange={e=>setSearchTerm(e.target.value)} />
@@ -44,7 +48,7 @@ function ExamDetails({}) {
           .map((exam,key)=>{
             console.log('exam afteer map is',exam);
             return   <Col  className='exam1' md={4} lg={5}>
-        <Card bg={'light'}  border="primary"  text={'dark'} style={{ width: '50rem' }}>
+        <Card bg={'light'}  border="primary"  text={'dark'} style={{ width: '40rem' }}>
         <Card.Header >
         <Card.Title  >  {exam.title} </Card.Title>
         </Card.Header>
@@ -124,9 +128,16 @@ function ExamDetails({}) {
                     </Accordion>
                    
                     </Card.Body>
-                    <Card.Footer > <Link to={`/editexam/${exam.id}`}> 
+
+                    <Card.Footer >
+                        <Link to={`/editexam/${exam.id}`}>
                     <Button variant="primary" size="lg">Edit</Button>
-                    </Link></Card.Footer>
+                    </Link>
+                        <Link to={``}>
+                            <Button className={"delbutton"} variant="danger" size="lg">Delete</Button>
+                        </Link>
+
+                    </Card.Footer>
         </Card>
             </Col> 
 
@@ -134,7 +145,6 @@ function ExamDetails({}) {
           })}
           </Row>
      </div>
-  
    
 
      )

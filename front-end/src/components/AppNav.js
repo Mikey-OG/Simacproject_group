@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Navbar, NavbarBrand, Nav, NavItem, NavLink} from 'reactstrap';
+import '../App.css';
 //import {AuthenticationState, AzureAD} from "react-aad-msal";
 //import {AuthenticationState, AzureAD} from "react-aad-msal";
 //import { authProvider} from "../authProvider";
@@ -34,7 +35,7 @@ class AppNav extends Component {
 
            
             <div>
-                <Navbar color="success" dark expand="md">
+                <Navbar className="color-nav" dark expand="md">
                     <NavbarBrand href="/">Exams Manager</NavbarBrand>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
